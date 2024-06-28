@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import orderRoutes from './routes/order/order';
 import productRoutes from './routes/product/product';
 import userRoutes from './routes/user/user';
+import domainRoutes from './routes/domainRegistration/domain.registration';
 
 const app = express();
 
@@ -16,6 +17,7 @@ connectToMongoDB();
 app.use('/users', userRoutes);
 app.use('/orders', orderRoutes);
 app.use('/products', productRoutes);
+app.use('/domain', domainRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(port, () => {

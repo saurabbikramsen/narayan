@@ -30,6 +30,7 @@ const options: swaggerJsdoc.Options = {
         path.resolve(__dirname, '../routes/product/*.ts'),
         path.resolve(__dirname, '../routes/user/*.ts'),
         path.resolve(__dirname, '../routes/order/*.ts'),
+        path.resolve(__dirname, '../routes/domainRegistration/*.ts'),
     ],
 };
 
