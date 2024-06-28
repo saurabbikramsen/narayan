@@ -7,7 +7,7 @@ const domainRoutes = express.Router();
  * @swagger
  * /domain/check/{domainName}:
  *   get:
- *     summary: Check domain availability
+ *     summary: Check domain availability(mock)
  *     description: Check if a domain name is available for registration.
  *     tags:
  *      - Domain
@@ -44,7 +44,7 @@ domainRoutes.get(
  * @swagger
  * /domain/register:
  *   post:
- *     summary: Register a domain
+ *     summary: Register a domain(mock)
  *     description: Register a new domain name.
  *     tags:
  *      - Domain

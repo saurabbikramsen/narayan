@@ -183,4 +183,57 @@ orderRoutes.delete(
     }
 );
 
+/**
+ * @swagger
+ * /orders/track/{trackingNumber}:
+ *   get:
+ *     summary: Get shipment tracking information(mock)
+ *     description: Retrieve the current status and details of a shipment by its tracking number.
+ *     tags:
+ *      - Orders
+ *     parameters:
+ *       - in: path
+ *         name: trackingNumber
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The tracking number of the shipment to retrieve.
+ *     responses:
+ *       200:
+ *         description: Successful response with tracking information.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 trackingNumber:
+ *                   type: string
+ *                 status:
+ *                   type: string
+ *                   description: Current status of the shipment.
+ *                 location:
+ *                   type: string
+ *                   description: Current location of the shipment.
+ *                 estimatedDelivery:
+ *                   type: string
+ *                   format: date
+ *                   description: Estimated delivery date of the shipment.
+ *       404:
+ *         description: Shipment with the specified tracking number not found.
+ */
+orderRoutes.get('/track/:trackingNumber', (req, res) => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 2);
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    const { trackingNumber } = req.params;
+    const trackingInfo = {
+        trackingNumber,
+        status: 'In transit',
+        location: 'mumbai wareHouse ',
+        estimatedDelivery: formattedDate,
+    };
+
+    res.json(trackingInfo);
+});
+
 export default orderRoutes;
