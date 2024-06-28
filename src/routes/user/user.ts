@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
-import User from '../models/User';
 import { error } from 'console';
 import { body, query, validationResult } from 'express-validator';
+import User from '../../models/User';
 import { CreateUser, PathParam } from './userDto';
 
 const userRoutes = express.Router();
@@ -89,7 +89,7 @@ userRoutes.post(
  *     tags:
  *      - Users
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: id
  *         schema:
  *           type: string
@@ -120,7 +120,7 @@ userRoutes.post(
  *         description: Successful response with a list of users.
  */
 userRoutes.put(
-    '/',
+    '/:id',
     [
         body('name')
             .isString()
@@ -152,7 +152,7 @@ userRoutes.put(
                 return res.status(400).json({ errors: errors.array() });
             }
             const alreadyPresent = await User.findOne({
-                _id: req.query.id,
+                _id: req.params.id,
             });
             console.log(alreadyPresent);
             if (!alreadyPresent) throw error('user not present');
@@ -175,7 +175,7 @@ userRoutes.put(
  *     tags:
  *      - Users
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: id
  *         schema:
  *           type: string
@@ -186,16 +186,16 @@ userRoutes.put(
  *         description: deletion message.
  */
 userRoutes.delete(
-    '/',
+    '/:id',
     [query('id').isString().isLength({ min: 5 }).trim()],
-    async (req: Request, res: Response) => {
+    async (req: Request<PathParam>, res: Response) => {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 throw error(errors.array());
             }
             const alreadyPresent = await User.findOne({
-                _id: req.query.id,
+                _id: req.params.id,
             });
             console.log(alreadyPresent);
             if (!alreadyPresent) throw error('user not present');

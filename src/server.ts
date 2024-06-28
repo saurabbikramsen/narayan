@@ -1,11 +1,11 @@
 import express from 'express';
 import { port } from './constants/env.constants';
 import { connectToMongoDB } from './config/mongodb.config';
-import orderRoutes from './routes/order';
 import specs from './config/swagger.config';
 import swaggerUi from 'swagger-ui-express';
-import productRoutes from './routes/product';
-import userRoutes from './routes/user';
+import orderRoutes from './routes/order/order';
+import productRoutes from './routes/product/product';
+import userRoutes from './routes/user/user';
 
 const app = express();
 

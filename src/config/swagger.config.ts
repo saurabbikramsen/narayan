@@ -15,10 +15,22 @@ const options: swaggerJsdoc.Options = {
                 name: 'Users',
                 description: 'get, create, update and delete users',
             },
+            {
+                name: 'Products',
+                description: 'get, create, update and delete products',
+            },
+            {
+                name: 'Orders',
+                description: 'get, create, update and delete orders',
+            },
         ],
     },
     // Path to the API docs
-    apis: [path.resolve(__dirname, '.././routes/*.ts')],
+    apis: [
+        path.resolve(__dirname, '../routes/product/*.ts'),
+        path.resolve(__dirname, '../routes/user/*.ts'),
+        path.resolve(__dirname, '../routes/order/*.ts'),
+    ],
 };
 
 const specs = swaggerJsdoc(options);
